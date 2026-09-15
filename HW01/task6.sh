@@ -6,7 +6,7 @@
 
 #SBATCH -J FirstSlurm
 
-#SBATCH -o FirstSlurm.out -e FirstSlurm.err
+#SBATCH -o task6.out -e task6.err
 
 #SBATCH -c 2
 
