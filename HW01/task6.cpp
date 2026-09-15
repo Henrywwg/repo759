@@ -10,11 +10,11 @@ int main(int argc, char* argv[]) {
     else 
         return 1;
 
-    for (int i = 1; i <= n; i++) 
+    for (int i = 0; i <= n; i++) 
         printf("%d ", i);
     printf("\n");
 
-    for (int i = n; i >= 1; i--) 
+    for (int i = n; i >= 0; i--) 
         cout << i << " ";
     cout << endl;
     
