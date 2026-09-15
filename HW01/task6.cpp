@@ -15,7 +15,7 @@ int main(int argc, char* argv[]) {
     printf("\n");
 
     for (int i = n; i >= 1; i--) 
-        cout << i << endl;
+        cout << i << " ";
     cout << endl;
     
     return 0;
