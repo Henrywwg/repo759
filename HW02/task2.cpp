@@ -12,9 +12,15 @@ int main(int argc, char* argv[]) {
     std::chrono::high_resolution_clock::time_point start;
     std::chrono::high_resolution_clock::time_point end;
     std::chrono::duration<double, std::milli> duration_sec;
-    
-    std::random_device rd;
-    std::mt19937 gen(rd());
+
+    const auto now = std::chrono::high_resolution_clock::now()
+                     .time_since_epoch()
+                     .count();
+
+    std::mt19937 gen(static_cast<std::mt19937::result_type>(now));
+
+    // std::random_device rd;
+    // std::mt19937 gen(rd());
     std::uniform_real_distribution<float> dis(-10.0f, 10.0f);
     std::uniform_real_distribution<float> dis2(-1.0f, 1.0f);
 
@@ -42,7 +48,7 @@ int main(int argc, char* argv[]) {
         mask[i] = dis2(gen);
     }
 
-    for(int i = 0; i < (n+2)*(n+2); i++){
+    for(int i = 0; i < (n*n); i++){
         output[i] = 0;
     }
 
@@ -58,6 +64,7 @@ int main(int argc, char* argv[]) {
         mask[6] = 1; mask[7] = 0; mask[8] = 0;
     }
     */
+    
     // timing
     start = std::chrono::high_resolution_clock::now();
 
