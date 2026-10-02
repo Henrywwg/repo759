@@ -24,26 +24,12 @@ for exponent in $(seq 10 30); do
     printf '%s %s\n' "$n" "$time_ms" >> "$results"
 done
 
-python3 - "$results" "$plot" <<'PY'
-import sys
-
-import matplotlib.pyplot as plt
-
-results_path, plot_path = sys.argv[1:3]
-n_values = []
-time_values = []
-
-with open(results_path, encoding="utf-8") as results:
-    for line in results:
-        n, milliseconds = line.split()
-        n_values.append(int(n))
-        time_values.append(float(milliseconds))
-
-plt.plot(n_values, time_values, marker="o")
-plt.xlabel("n")
-plt.ylabel("Time (milliseconds)")
-plt.title("Task 1 scan time")
-plt.grid(True)
-plt.tight_layout()
-plt.savefig(plot_path)
-PY
+gnuplot <<GNUPLOT
+set terminal pdf
+set output "$plot"
+set xlabel "n"
+set ylabel "Time (milliseconds)"
+set title "Task 1 scan time"
+set grid
+plot "$results" using 1:2 with linespoints title "scan"
+GNUPLOT
