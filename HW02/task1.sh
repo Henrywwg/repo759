@@ -3,14 +3,12 @@
 #SBATCH -p instruction
 #SBATCH -t 0-00:30:00
 #SBATCH -J task1-timing
-#SBATCH -o task1-%j.out
-#SBATCH -e task1-%j.err
+#SBATCH -o task1.out
+#SBATCH -e task1.err
 #SBATCH -c 1
 #SBATCH --mem=12G
 
 set -euo pipefail
-
-cd "$(dirname "$0")"
 
 g++ scan.cpp task1.cpp -Wall -O3 -std=c++17 -o task1
 
