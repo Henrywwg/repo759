@@ -1,7 +1,14 @@
 #include <iostream>
 #include <random>
 #include <chrono>
+#include <string>
 #include "convolution.h"
+
+/**
+ * Claude opus5.5 used to check and review code. 
+ * Edits made to clean up code and prevent compiler warnings. 
+ * Other edits made by me.
+ */
 
 int main(int argc, char* argv[]) {
 
@@ -25,22 +32,14 @@ int main(int argc, char* argv[]) {
     std::uniform_real_distribution<float> dis2(-1.0f, 1.0f);
 
     // Allocate mem for io arrays
-    float *input = new float[(2+n)*(2+n)];  // allocate extra space for padding
+    float *input = new float[n*n];  // allocate extra space for padding
     float *mask = new float[m*m];
     float *output = new float[n*n];
 
     // Initialize input array
-    for (std::size_t i = 0; i < n+2; i++) {
-        for (std::size_t j = 0; j < n+2; j++) {
-            if ((i == 0 && j == 0) || ((i == 0) && (j == (n+1))) || ((i == (n + 1)) && (j == 0)) || ((i == (n + 1)) && (j == (n + 1)))){   //corners get zero
-                input[i * (n+2) + j] = 0;
-            }
-            else if ((i == 0) || (i == (n + 1)) || (j == 0) || (j == (n + 1))){   //edges get one
-                input[i * (n+2) + j] = 1;
-            }
-            else{
-                input[i * (n+2) + j] = dis(gen);
-            }
+    for (std::size_t i = 0; i < n; i++) {
+        for (std::size_t j = 0; j < n; j++) {
+            input[i * (n) + j] = dis(gen);
         }
     }
     // Initialize mask array
@@ -48,7 +47,7 @@ int main(int argc, char* argv[]) {
         mask[i] = dis2(gen);
     }
 
-    for(int i = 0; i < (n*n); i++){
+    for(std::size_t i = 0; i < (n*n); i++){
         output[i] = 0;
     }
 

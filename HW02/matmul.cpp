@@ -2,6 +2,7 @@
 #include "matmul.h"
 
 void mmul1(const double *A, const double *B, double *C, const unsigned int n){
+    std::fill(C, C + n * n, 0.0);
     for(int i = 0; i < n; i++){                             //Iterate rows      
         for(int j = 0; j < n; j++){                         //Iterate columns   
             for(int k = 0; k < n; k++){
@@ -12,6 +13,7 @@ void mmul1(const double *A, const double *B, double *C, const unsigned int n){
 }
 
 void mmul2(const double *A, const double *B, double *C, const unsigned int n){
+    std::fill(C, C + n * n, 0.0);
     for(int i = 0; i < n; i++){                             //Iterate rows      
         for(int k = 0; k < n; k++){                         //Iterate summation index   
             for(int j = 0; j < n; j++){                     //Iterate columns
@@ -22,6 +24,7 @@ void mmul2(const double *A, const double *B, double *C, const unsigned int n){
 }
 
 void mmul3(const double *A, const double *B, double *C, const unsigned int n){
+    std::fill(C, C + n * n, 0.0);
     for(int j = 0; j < n; j++){                             //Iterate columns
         for(int k = 0; k < n; k++){                         //Iterate summation index
             for(int i = 0; i < n; i++){                     //Iterate rows
@@ -32,6 +35,7 @@ void mmul3(const double *A, const double *B, double *C, const unsigned int n){
 }
 
 void mmul4(const std::vector<double> &A, const std::vector<double> &B, double *C, const unsigned int n){
+    std::fill(C, C + n * n, 0.0);
     for(int i = 0; i < n; i++){                             //Iterate rows      
         for(int j = 0; j < n; j++){                         //Iterate columns   
             for(int k = 0; k < n; k++){

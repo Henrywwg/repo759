@@ -2,6 +2,7 @@
 #include <random>
 #include <chrono>
 #include "matmul.h"
+#include <algorithm>
 
 int main(int argc, char* argv[]) {
 
@@ -47,6 +48,7 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    std::cout << n << std::endl;
     
     // timing
     {    
@@ -59,7 +61,6 @@ int main(int argc, char* argv[]) {
         duration_sec = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(end - start);
 
         std::cout << duration_sec.count() << std::endl;
-        std::cout << c[0] << std::endl;
         std::cout << c[n*n - 1] << std::endl;
     }
 
@@ -77,7 +78,6 @@ int main(int argc, char* argv[]) {
         duration_sec = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(end - start);
 
         std::cout << duration_sec.count() << std::endl;
-        std::cout << c[0] << std::endl;
         std::cout << c[n*n - 1] << std::endl;
     }
 
@@ -95,7 +95,6 @@ int main(int argc, char* argv[]) {
         duration_sec = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(end - start);
 
         std::cout << duration_sec.count() << std::endl;
-        std::cout << c[0] << std::endl;
         std::cout << c[n*n - 1] << std::endl;
     }
 
@@ -113,7 +112,6 @@ int main(int argc, char* argv[]) {
         duration_sec = std::chrono::duration_cast<std::chrono::duration<double, std::milli>>(end - start);
 
         std::cout << duration_sec.count() << std::endl;
-        std::cout << c[0] << std::endl;
         std::cout << c[n*n - 1] << std::endl;
     }
 

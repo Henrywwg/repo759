@@ -1,6 +1,7 @@
 #include <iostream>
 #include <random>
 #include <chrono>
+#include <string>
 #include "scan.h"
 
 int main(int argc, char* argv[]) {
