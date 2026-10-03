@@ -83,6 +83,7 @@ int main(int argc, char* argv[]) {
     // Free memory
     delete[] (input);
     delete[] (output);
+    delete[] (mask);
 
     return 0;
 }
