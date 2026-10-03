@@ -3,10 +3,10 @@
 
 void mmul1(const double *A, const double *B, double *C, const unsigned int n){
     std::fill(C, C + n * n, 0.0);
-    for(int i = 0; i < n; i++){                             //Iterate rows      
-        for(int j = 0; j < n; j++){                         //Iterate columns   
+    for(int i = 0; i < n; i++){                                   
+        for(int j = 0; j < n; j++){                            
             for(int k = 0; k < n; k++){
-                C[i*n + j] += A[i*n + k] * B[k*n + j];      // C[i][j] += A[i][k] * B[k][j]
+                C[i*n + j] += A[i*n + k] * B[k*n + j];      
             }
         }
     }
@@ -14,10 +14,10 @@ void mmul1(const double *A, const double *B, double *C, const unsigned int n){
 
 void mmul2(const double *A, const double *B, double *C, const unsigned int n){
     std::fill(C, C + n * n, 0.0);
-    for(int i = 0; i < n; i++){                             //Iterate rows      
-        for(int k = 0; k < n; k++){                         //Iterate summation index   
-            for(int j = 0; j < n; j++){                     //Iterate columns
-                C[i*n + j] += A[i*n + k] * B[k*n + j];      // C[i][j] += A[i][k] * B[k][j]
+    for(int i = 0; i < n; i++){                                   
+        for(int k = 0; k < n; k++){                            
+            for(int j = 0; j < n; j++){                     
+                C[i*n + j] += A[i*n + k] * B[k*n + j];      
             }
         }
     }
@@ -25,10 +25,10 @@ void mmul2(const double *A, const double *B, double *C, const unsigned int n){
 
 void mmul3(const double *A, const double *B, double *C, const unsigned int n){
     std::fill(C, C + n * n, 0.0);
-    for(int j = 0; j < n; j++){                             //Iterate columns
-        for(int k = 0; k < n; k++){                         //Iterate summation index
-            for(int i = 0; i < n; i++){                     //Iterate rows
-                C[i*n + j] += A[i*n + k] * B[k*n + j];      // C[i][j] += A[i][k] * B[k][j]
+    for(int j = 0; j < n; j++){                             
+        for(int k = 0; k < n; k++){                         
+            for(int i = 0; i < n; i++){                     
+                C[i*n + j] += A[i*n + k] * B[k*n + j];      
             }
         }
     }
@@ -36,10 +36,10 @@ void mmul3(const double *A, const double *B, double *C, const unsigned int n){
 
 void mmul4(const std::vector<double> &A, const std::vector<double> &B, double *C, const unsigned int n){
     std::fill(C, C + n * n, 0.0);
-    for(int i = 0; i < n; i++){                             //Iterate rows      
-        for(int j = 0; j < n; j++){                         //Iterate columns   
+    for(int i = 0; i < n; i++){                                  
+        for(int j = 0; j < n; j++){                          
             for(int k = 0; k < n; k++){
-                C[i*n + j] += A[i*n + k] * B[k*n + j];      // C[i][j] = A[i][k] * B[k][j]
+                C[i*n + j] += A[i*n + k] * B[k*n + j];   
             }
         }
     }
