@@ -1,7 +1,7 @@
 #include "msort.h"
 #include <algorithm>
 
-void msort(int *arr, const std::size_t n, const std::size_t threshold){
+void msort(int* arr, const std::size_t n, const std::size_t threshold){
     if(n <= threshold){
         std::sort(arr, arr + n);
     } else {

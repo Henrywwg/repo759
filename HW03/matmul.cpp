@@ -2,7 +2,7 @@
 #include "matmul.h"
 
 
-void mmul(const float *A, const float *B, float *C, const unsigned long long n){
+void mmul(const float* A, const float* B, float* C, const std::size_t n){
     std::fill(C, C + n * n, 0.0);
     #pragma omp parallel for
         for(int i = 0; i < n; i++){                                   
