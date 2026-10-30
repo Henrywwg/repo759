@@ -3,6 +3,7 @@
 #include <chrono>
 #include "matmul.h"
 #include <algorithm>
+#include <vector>
 
 int main(int argc, char* argv[]) {
 

@@ -16,7 +16,7 @@ g++ task3.cpp msort.cpp -Wall -O3 -std=c++17 -o task3 -fopenmp
 
 for i in {1..20}
 do
-    output=$(./task3 1000000 "$i" "extract value from task3p1") || exit 1
+    output=$(./task3 1000000 "$i" 512) || exit 1
     printf '%s\n' "$output" | awk '
         NR == 1 { first = $0 }
         NR == 2 { second = $0 }

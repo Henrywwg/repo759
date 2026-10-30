@@ -1,7 +1,7 @@
 #include "msort.h"
 #include <algorithm>
 
-void msort(int* arr, const std::size_t n, const std::size_t threshold){
+void msort_helper(int* arr, const std::size_t n, const std::size_t threshold){
     if(n <= threshold){
         std::sort(arr, arr + n);
     } else {
@@ -9,14 +9,23 @@ void msort(int* arr, const std::size_t n, const std::size_t threshold){
         
         #pragma omp task shared(arr)
         
-        msort(arr, mid, threshold);
+        msort_helper(arr, mid, threshold);
         
         #pragma omp task shared(arr)
         
-        msort(arr + mid, n - mid, threshold);
+        msort_helper(arr + mid, n - mid, threshold);
         
         #pragma omp taskwait
         std::inplace_merge(arr, arr + mid, arr + n);
     }
+}
 
+void msort(int* arr, const std::size_t n, const std::size_t threshold){
+    #pragma omp parallel
+    {
+        #pragma omp single
+        {
+            msort_helper(arr, n, threshold);
+        }
+    }
 }
