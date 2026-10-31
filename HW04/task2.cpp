@@ -184,9 +184,8 @@ int main(int argc, char *argv[]) {
         t += dt;
 
         // For debug: save positions to CSV at each step
-        savePositionsToCSV(pos, N, step, filename);
+        // savePositionsToCSV(pos, N, step, filename);
     }
-    // savePositionsToCSV(pos, N, step, filename); // Final positions to compare against python
 
     // Clean up dynamically allocated memory
     delete[] mass;
