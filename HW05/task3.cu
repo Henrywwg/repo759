@@ -29,18 +29,24 @@ int main(int argc, char **argv){
     std::uniform_real_distribution<float> dis2(0.0f, 1.0f);
 
     //allocate mem on device and host
-    float *da, *db, *b;
+    float *da, *db, *b, *ha, *hb;
     cudaMalloc((void**)&da, numBlocks * numThreads * sizeof(float));
     cudaMalloc((void**)&db, numBlocks * numThreads * sizeof(float));
     b = new float[N];
+    ha = new float[N];
+    hb = new float[N];
+
 
     // a gets a random float 
     for(int i = 0; i < N; i++)
-        da[i] = static_cast<float>(dis1(gen));
+        ha[i] = static_cast<float>(dis1(gen));
 
     for(int i = 0; i < N; i++)
-        db[i] = static_cast<float>(dis2(gen));
+        hb[i] = static_cast<float>(dis2(gen));
 
+    //copy the data to device
+    cudaMemcpy(da, ha, numBlocks * numThreads * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(db, hb, numBlocks * numThreads * sizeof(float), cudaMemcpyHostToDevice);
 
     cudaEvent_t start;
     cudaEvent_t stop;
@@ -58,7 +64,7 @@ int main(int argc, char **argv){
     cudaEventSynchronize(stop);
 
     //copy the data back to host
-    cudaMemcpy(b, db, numBlocks * numThreads * sizeof(float), cudaMemcpyDeviceToHost);
+    cudaMemcpy(b, db, N * sizeof(float), cudaMemcpyDeviceToHost);
 
     // Get the elapsed time in milliseconds
     float ms;
