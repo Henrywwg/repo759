@@ -2,9 +2,9 @@
 
 #SBATCH -p instruction
 #SBATCH -t 0-00:30:00
-#SBATCH -J task1-timing
-#SBATCH -o task1.out
-#SBATCH -e task1.err
+#SBATCH -J task2
+#SBATCH -o task2.out
+#SBATCH -e task2.err
 #SBATCH --ntasks=1
 #SBATCH -c 1
 #SBATCH --mem=12G
