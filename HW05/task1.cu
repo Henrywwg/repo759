@@ -1,39 +1,27 @@
 #include <stdio.h>
 #include <cuda.h>
 
-__global__ void task1(int *data){
+__global__ void task1(){
     //get thread id
-    int tid = blockIdx.x * blockDim.x + threadIdx.x;
+    int tid = blockIdx.x * blockDim.x + threadIdx.x + 1;
     
     int temp = 1;
 
     //Naive implementation of factorial 
-    for(int i = tid - 1; i > 0; i--){
+    for(int i = tid; i > 1; i--){
         temp *= i;
     }
 
-    data[tid] = temp;
-
-    printf("%d!=%d\n", tid, data[tid]);
+    printf("%d!=%d\n", tid, temp);
 
 }
 
 int main(){
     const int numThreads = 8;
-    int data_host[numThreads], *data_device;
-
-
-    //allocate mem... 
-    cudaMalloc((void**)&data_device, numThreads * sizeof(int));
-    cudaMemset(data_device, 0, numThreads * sizeof(int));
-
 
     //call the kernel; 1 block 8 threads
-    task1<<<1, numThreads>>>(data_device);
-
-
-    //copy the data back to host
-    cudaMemcpy(data_host, data_device, numThreads * sizeof(int), cudaMemcpyDeviceToHost);
+    task1<<<1, numThreads>>>();
+    cudaDeviceSynchronize();
 
 
     return 0;
