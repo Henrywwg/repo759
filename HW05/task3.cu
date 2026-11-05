@@ -30,8 +30,8 @@ int main(int argc, char **argv){
 
     //allocate mem on device and host
     float *da, *db, *b;
-    cudaMalloc((void**)&da, N * sizeof(float));
-    cudaMalloc((void**)&db, N * sizeof(float));
+    cudaMalloc((void**)&da, numBlocks * numThreads * sizeof(float));
+    cudaMalloc((void**)&db, numBlocks * numThreads * sizeof(float));
     b = new float[N];
 
     // a gets a random float 
@@ -58,7 +58,7 @@ int main(int argc, char **argv){
     cudaEventSynchronize(stop);
 
     //copy the data back to host
-    cudaMemcpy(b, db, N * sizeof(float), cudaMemcpyDeviceToHost);
+    cudaMemcpy(b, db, numBlocks * numThreads * sizeof(float), cudaMemcpyDeviceToHost);
 
     // Get the elapsed time in milliseconds
     float ms;

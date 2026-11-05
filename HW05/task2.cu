@@ -1,6 +1,7 @@
-#include <stdio.h>
-#include <cuda.h>
+#include <iostream>
 #include <random>
+#include <string>
+#include <chrono>
 
 
 //omg it's an AXPY 
@@ -17,19 +18,23 @@ int main(){
     const int numElements = numBlocks * numThreads;
 
 
-	std::random_device entropy_source;
-    std::mt19937 generator(entropy_source());
+    // Get the current time for RNG
+    const auto now = std::chrono::high_resolution_clock::now()
+                    .time_since_epoch()
+                    .count();    
+    
+    std::mt19937 generator(now);
 
     //allocate mem on device and host
-    int *dA, *a, hA[numElements];
+    int *dA, a, hA[numElements];
     cudaMalloc((void**)&dA, numBlocks * numThreads * sizeof(int));
     cudaMalloc((void**)&a, sizeof(int));
 
     // a gets a random int 
-    *a = generator();
+    a = generator();
     
     //call the kernel; 2 blocks 8 threads
-    iaxpy<<<numBlocks, numThreads>>>(dA, a);
+    iaxpy<<<numBlocks, numThreads>>>(dA, &a);
     cudaDeviceSynchronize();
 
     //copy the data back to host
