@@ -26,18 +26,13 @@ int main(){
     //random number generator 
     std::mt19937 gen(static_cast<std::mt19937::result_type>(now));
 
-    std::uniform_real_distribution<int> dis(0, 10);
+    std::uniform_int_distribution<int> dis(0, 10);
 
     //allocate mem on device and host
-    int *dA, a, hA[numElements];
-    cudaMalloc((void**)&dA, numBlocks * numThreads * sizeof(int));
-    cudaMalloc((void**)&a, sizeof(int));
+    int *dA, hA[numElements];
+    cudaMalloc((void**)&dA, numElements * sizeof(int));
 
-    // a gets a random int
-    int a_temp = static_cast<int>(dis(gen)); 
-    cudaMemcpy(&a, &a_temp, sizeof(int), cudaMemcpyHostToDevice);
-    
-    //call the kernel; 2 blocks 8 threads
+    int a = dis(gen);
     iaxpy<<<numBlocks, numThreads>>>(dA, a);
     cudaDeviceSynchronize();
 
