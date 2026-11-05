@@ -45,8 +45,8 @@ int main(int argc, char **argv){
         hb[i] = static_cast<float>(dis2(gen));
 
     //copy the data to device
-    cudaMemcpy(da, ha, numBlocks * numThreads * sizeof(float), cudaMemcpyHostToDevice);
-    cudaMemcpy(db, hb, numBlocks * numThreads * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(da, ha, N * sizeof(float), cudaMemcpyHostToDevice);
+    cudaMemcpy(db, hb, N * sizeof(float), cudaMemcpyHostToDevice);
 
     cudaEvent_t start;
     cudaEvent_t stop;
