@@ -2,6 +2,7 @@
 #include <cuda.h>
 #include <random>
 
+
 //omg it's an AXPY 
 __global__ void iaxpy(int *dA, int *a){
     //get thread id
@@ -16,9 +17,8 @@ int main(){
     const int numElements = numBlocks * numThreads;
 
 
-    int some_seed = 759;
-    std::mt19937 generator(some_seed);
-
+	std::random_device entropy_source;
+    std::mt19937 generator(entropy_source());
 
     //allocate mem on device and host
     int *dA, *a, hA[numElements];
