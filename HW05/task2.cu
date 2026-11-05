@@ -26,15 +26,16 @@ int main(){
     std::mt19937 generator(now);
 
     //allocate mem on device and host
-    int *dA, a, hA[numElements];
+    int *dA, *a, hA[numElements];
     cudaMalloc((void**)&dA, numBlocks * numThreads * sizeof(int));
     cudaMalloc((void**)&a, sizeof(int));
 
-    // a gets a random int 
-    a = generator();
+    // a gets a random int
+    int a_temp = generator(); 
+    cudaMemcpy(a, &a_temp, sizeof(int), cudaMemcpyHostToDevice);
     
     //call the kernel; 2 blocks 8 threads
-    iaxpy<<<numBlocks, numThreads>>>(dA, &a);
+    iaxpy<<<numBlocks, numThreads>>>(dA, a);
     cudaDeviceSynchronize();
 
     //copy the data back to host
