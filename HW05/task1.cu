@@ -4,11 +4,16 @@
 __global__ void task1(int *data){
     //get thread id
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
+    
+    int temp = 1;
 
     //Naive implementation of factorial 
     for(int i = tid - 1; i > 0; i--){
-        data[tid] *= i;
+        temp *= i;
     }
+
+    data[tid] = temp;
+
     printf("%d!=%d\n", tid, data[tid]);
 
 }
@@ -20,7 +25,7 @@ int main(){
 
     //allocate mem... 
     cudaMalloc((void**)&data_device, numThreads * sizeof(int));
-    cudaMemset(data_device, 1, numThreads * sizeof(int));
+    cudaMemset(data_device, 0, numThreads * sizeof(int));
 
 
     //call the kernel; 1 block 8 threads
