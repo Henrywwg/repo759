@@ -5,6 +5,7 @@
 #SBATCH -J task1-timing
 #SBATCH -o task1.out
 #SBATCH -e task1.err
+#SBATCH --ntasks=1
 #SBATCH -c 1
 #SBATCH --mem=12G
 #SBATCH --gpus-per-task=1

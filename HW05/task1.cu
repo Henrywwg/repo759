@@ -14,7 +14,6 @@ __global__ void task1(int *data){
 }
 
 int main(){
-    
     const int numThreads = 8;
     int data_host[numThreads], *data_device;
 
